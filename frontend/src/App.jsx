@@ -13,13 +13,13 @@ function App() {
     return(
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<Landing/>}/>
+                <Route path="/application" element={<Landing/>}/>
                 <Route path="/signin" element={<Signin/>}/>
                 <Route path="/signup" element={<Signup/>}/>
                 <Route path="/admindashboard" element={<Admindashboard/>}/>
                 <Route path="/studentsignin" element={<StudentSignin/>}/>
                 <Route path="/studentsignup" element={<StudentSignup/>}/>
-                <Route path="/application" element={<Application/>}/>
+                <Route path="/" element={<Application/>}/>
             </Routes>
         </BrowserRouter>
     )
