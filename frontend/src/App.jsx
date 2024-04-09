@@ -7,19 +7,21 @@ import './App.css'
 import { Admindashboard } from './pages/Admindashboard'
 import {StudentSignup} from "./pages/StudentSignup"
 import { Application } from './pages/Application'
+import { Profile } from './pages/Profile'
 
 function App() {
 
     return(
         <BrowserRouter>
             <Routes>
-                <Route path="/application" element={<Landing/>}/>
+                <Route path="/" element={<Landing/>}/>
                 <Route path="/signin" element={<Signin/>}/>
                 <Route path="/signup" element={<Signup/>}/>
                 <Route path="/admindashboard" element={<Admindashboard/>}/>
                 <Route path="/studentsignin" element={<StudentSignin/>}/>
                 <Route path="/studentsignup" element={<StudentSignup/>}/>
-                <Route path="/" element={<Application/>}/>
+                <Route path="/application" element={<Application/>}/>
+                <Route path="/profile" element={<Profile/>}/>
             </Routes>
         </BrowserRouter>
     )

@@ -37,13 +37,15 @@ import { Link } from "react-router-dom";
               Hostel Form
             </ListItem>
           </Link>
+          <Link to="/profile">
           <ListItem className={selectedItem === 3 ? "bg-gray-400" : "bg-gray-300"} onClick={() => handleItemClick(3)}>
             <ListItemPrefix>
               <UserCircleIcon className="h-5 w-5 m-5" />
             </ListItemPrefix>
             Profile
           </ListItem>
-          <Link to="/studentsignin">
+          </Link>
+          <Link to="/studentsignin" onClick={()=>localStorage.clear()}>
             <ListItem className={selectedItem === 4 ? "bg-gray-400" : "bg-gray-300"} onClick={() => handleItemClick(4)}>
               <ListItemPrefix>
                 <PowerIcon className="h-5 w-5 m-5" />

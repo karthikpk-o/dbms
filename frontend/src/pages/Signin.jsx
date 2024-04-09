@@ -36,7 +36,7 @@ export const Signin = () => {
                   password
               });
               
-              localStorage.setItem("token", response.data.token);
+              sessionStorage.setItem("token", response.data.token);
               navigate("/admindashboard");
           } catch (error) {
               if (error.response && error.response.status === 411) {

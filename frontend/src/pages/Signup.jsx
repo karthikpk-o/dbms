@@ -42,7 +42,7 @@ export const Signup = () => {
                   lastName
               });
               
-              localStorage.setItem("token", response.data.token);
+              session.setItem("token", response.data.token);
               navigate("/admindashboard");
           } catch (error) {
               if (error.response && error.response.status === 411) {
