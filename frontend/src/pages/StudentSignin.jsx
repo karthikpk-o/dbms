@@ -37,7 +37,7 @@ export const StudentSignin = () => {
               });
               
               localStorage.setItem("token", response.data.token);
-              navigate("/application");
+              navigate("/student/application");
           } catch (error) {
               if (error.response && error.response.status === 411) {
                   alert(error.response.data.message);

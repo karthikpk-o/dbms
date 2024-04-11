@@ -20,8 +20,8 @@ function App() {
                 <Route path="/admindashboard" element={<Admindashboard/>}/>
                 <Route path="/studentsignin" element={<StudentSignin/>}/>
                 <Route path="/studentsignup" element={<StudentSignup/>}/>
-                <Route path="/application" element={<Application/>}/>
-                <Route path="/profile" element={<Profile/>}/>
+                <Route path="/student/application" element={<Application/>}/>
+                <Route path="/student/profile" element={<Profile/>}/>
             </Routes>
         </BrowserRouter>
     )

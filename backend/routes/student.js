@@ -4,6 +4,7 @@ import pool from '../database.js';
 import dotenv from 'dotenv';
 import jwt from 'jsonwebtoken';
 import authMiddleware from "../middleware.js";
+import moment from 'moment/moment.js';
 
 dotenv.config();
 
@@ -126,15 +127,17 @@ const applyBody = zod.object({
     firstname: zod.string(),
     lastname: zod.string(),
     cgpa: zod.number(),
-    bday: zod.date(),
-    Gender: zod.string(),
+    bday: zod.string(),
+    gender: zod.string(),
     pemail: zod.string().email(),
     email: zod.string().email(),
     pname: zod.string(),
-    phno: zod.number(),
+    phno: zod.string(),
+    rollno: zod.string()
 })
-router.post("/apply", authMiddleware, async(req,res)=>{
-    const {success, data, error} = signupBody.safeParse(req.body)
+
+router.post("/apply", async(req,res)=>{
+    const {success, data, error} = applyBody.safeParse(req.body)
     if(!success){
         return res.status(411).json({
             message: "Incorrect inputs",
@@ -142,17 +145,11 @@ router.post("/apply", authMiddleware, async(req,res)=>{
         })
     }
 
-    const [existingUser] = await pool.query(`SELECT * FROM APPLICATION WHERE rollno= ?`, [req.body.rollno]);
-
-    if (existingUser.length > 0) {
-        return res.status(411).json({
-            message: "Email already taken/Incorrect inputs"
-        })
-    }
-
     try {
-        await pool.query(`INSERT INTO STUDENT(rollno, password, firstname, lastname)
-            VALUES(?,?,?,?)`, [req.body.rollno, req.body.password, req.body.firstName, req.body.lastName]);
+        const formattedBday = moment(req.body.bday, "DD-MM-YYYY").format("YYYY-MM-DD");
+
+        await pool.query(`UPDATE STUDENT SET cgpa=?, bday=?, gender=?, pemail=?, email=?, pname=?, phno=? WHERE rollno=?`, 
+        [req.body.cgpa, formattedBday, req.body.gender, req.body.pemail, req.body.email, req.body.pname, req.body.phno, req.body.rollno]);
 
         res.json({
             message: "Application submitted successfully",
