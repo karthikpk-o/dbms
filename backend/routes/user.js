@@ -97,5 +97,34 @@ router.post("/signin", async (req, res) => {
     })
 })
 
+router.use("/filter-cgpa" ,async(req, res)=>{
+    try{
+        const [rows] = await pool.query(`SELECT * FROM APPLIED ORDER BY cgpa DESC`);
+
+        if(rows.length>0){
+            res.status(200).json(rows);
+        }else {
+            res.status(404).json({ message: "Student not found"});
+        }
+    } catch (error) {
+        console.error("Error executing SQL query:", error);
+        res.status(500).json({ message: "Internal Server Error" });
+    }
+})
+
+router.use("/filter-bday" ,async(req, res)=>{
+    try{
+        const [rows] = await pool.query(`SELECT * FROM APPLIED ORDER BY bday`);
+
+        if(rows.length>0){
+            res.status(200).json(rows);
+        }else {
+            res.status(404).json({ message: "Student not found"});
+        }
+    } catch (error) {
+        console.error("Error executing SQL query:", error);
+        res.status(500).json({ message: "Internal Server Error" });
+    }
+})
 
 export default router;

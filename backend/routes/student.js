@@ -148,9 +148,11 @@ router.post("/apply", async(req,res)=>{
     try {
         const formattedBday = moment(req.body.bday, "DD-MM-YYYY").format("YYYY-MM-DD");
 
-        await pool.query(`UPDATE STUDENT SET cgpa=?, bday=?, gender=?, pemail=?, email=?, pname=?, phno=? WHERE rollno=?`, 
-        [req.body.cgpa, formattedBday, req.body.gender, req.body.pemail, req.body.email, req.body.pname, req.body.phno, req.body.rollno]);
-
+        await pool.query(
+            `INSERT INTO APPLIED (cgpa, bday, gender, pemail, email, pname, phno, rollno, firstname, lastname) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+            [req.body.cgpa, formattedBday, req.body.gender, req.body.pemail, req.body.email, req.body.pname, req.body.phno, req.body.rollno, req.body.firstname, req.body.lastname]
+          );
+          
         res.json({
             message: "Application submitted successfully",
         });
@@ -169,6 +171,19 @@ router.post("/apply", async(req,res)=>{
     }
 })
 
+router.get("/appliedlist", async(req,res)=>{
+    try{
+        const [rows] = await pool.query(`SELECT * FROM APPLIED`);
 
+        if(rows.length>0){
+            res.status(200).json(rows);
+        }else {
+            res.status(404).json({ message: "Student not found"});
+        }
+    } catch (error) {
+        console.error("Error executing SQL query:", error);
+        res.status(500).json({ message: "Internal Server Error" });
+    }
+})
 
 export default router;
