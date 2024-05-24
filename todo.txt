@@ -1,8 +1,3 @@
-
-. Create Admin Dashboard
-4. Create allotment form
-5. Show all student application lists
-6. allot students on CGPA
-7. Provisional allotment sheet
-
-8. Student confirms by paying
+allot students on CGPA
+Provisional allotment sheet
+Student confirms by paying
