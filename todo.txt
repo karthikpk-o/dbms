@@ -1,7 +1,5 @@
-1. Create Student Dashboard
-2. Display hostel application form, collect details(CGPA, mobileno) update Student Table
 
-3. Create Admin Dashboard
+. Create Admin Dashboard
 4. Create allotment form
 5. Show all student application lists
 6. allot students on CGPA
